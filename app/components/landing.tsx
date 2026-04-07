@@ -122,22 +122,22 @@ const process = [
   {
     step: "01",
     title: "Descoberta",
-    text: "Alinhamos objetivos, métricas e restrições para um escopo enxuto.",
+    text: "Entendemos sua necessidade, seu prazo e o que realmente precisa ser entregue.",
   },
   {
     step: "02",
-    title: "Arquitetura",
-    text: "Modelamos dados, contratos e a stack ideal para o seu contexto.",
+    title: "Planejamento",
+    text: "Definimos a melhor solução para o seu cenário, sem complicar o que pode ser simples.",
   },
   {
     step: "03",
     title: "Entrega contínua",
-    text: "Ciclos curtos, revisões frequentes e deploy previsível.",
+    text: "Você acompanha o andamento com clareza e recebe partes do projeto ao longo do processo.",
   },
   {
     step: "04",
     title: "Evolução",
-    text: "Monitoramento, melhorias e roadmap técnico junto do produto.",
+    text: "Depois de publicar, seguimos com melhorias para manter tudo funcionando bem.",
   },
 ];
 
@@ -299,19 +299,23 @@ export function Landing() {
               </p>
               <h1 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-semibold leading-[1.08] tracking-tight text-zinc-900 dark:text-white">
                 <span className="block overflow-hidden pb-1">
-                  <span className="hero-line-inner block">Software preciso.</span>
+                  <span className="hero-line-inner block">
+                    Tecnologia sob medida.
+                  </span>
                 </span>
                 <span className="block overflow-hidden pb-1">
-                  <span className="hero-line-inner block">Entrega contínua.</span>
+                  <span className="hero-line-inner block">
+                    Para empresas e autônomos.
+                  </span>
                 </span>
               </h1>
               <p
                 data-hero-sub
                 className="max-w-xl text-lg leading-relaxed text-zinc-600 sm:text-xl dark:text-zinc-400"
               >
-                Desenvolvimento de software sob medida para quem precisa de
-                código limpo, arquitetura sólida e experiências web de alto
-                desempenho — do discovery ao deploy.
+                Criamos sites, sistemas e automações para negócios que querem
+                crescer no digital, inclusive para quem ainda vai começar seu
+                primeiro projeto online.
               </p>
               <div data-hero-cta className="flex flex-wrap gap-4">
                 <Magnetic>
@@ -382,7 +386,7 @@ export function Landing() {
             className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-14 gap-y-6 px-5 text-center sm:px-8"
           >
             {[
-              ["Entrega rápida", "Acompanhamento frequente e sem surpresa"],
+              ["Entrega rápida", "Suprimos demandas com agilidade para otimizar seu tempo"],
               ["Transparência", "Você sabe o que está sendo feito e por quê"],
               ["Facilidade de uso", "Pensado para funcionar para qualquer pessoa"],
             ].map(([t, s]) => (
@@ -403,11 +407,11 @@ export function Landing() {
                 O que fazemos
               </p>
               <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl dark:text-white">
-                Engenharia ponta a ponta
+                Soluções do início ao resultado
               </h2>
               <p className="mt-4 max-w-2xl text-zinc-600 dark:text-zinc-400">
-                Transformamos necessidade de negócio em soluções digitais claras,
-                com tecnologia certa e foco em resultado real.
+                Sistemas personalizados de acordo com o perfil da empresa,
+                impulsione suas vendas.
               </p>
             </div>
 
@@ -536,7 +540,7 @@ export function Landing() {
               <p className="mt-4 text-zinc-600 dark:text-zinc-400">
                 Usamos ferramentas modernas, mas com foco em simplicidade: o que
                 realmente melhora velocidade, estabilidade e manutenção do seu
-                projeto. Sem exagero técnico, sem complicação desnecessária.
+                projeto. Tecnologia certa, linguagem clara e sem complicação.
               </p>
             </div>
 
@@ -554,9 +558,8 @@ export function Landing() {
                   </h3>
                 </div>
                 <p className="max-w-sm text-xs text-zinc-500 dark:text-zinc-500">
-                  Exemplo de interação avançada de interface. Esse tipo de
-                  recurso pode ser aplicado em catálogos, painéis, quadros de
-                  tarefas e sistemas internos.
+                  Exemplo de recurso interativo que pode ser usado em catálogos,
+                  painéis, listas de tarefas e sistemas internos.
                 </p>
               </div>
               <div data-no-lenis>
@@ -601,35 +604,7 @@ export function Landing() {
                   Transparência em cada etapa
                 </h2>
                 <p className="mt-4 text-zinc-600 dark:text-zinc-400">
-                  Rituais claros, documentação viva e comunicação direta com
-                  quem decide — no ritmo de referências como{" "}
-                  <a
-                    href="https://quentinhocde.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-800 underline decoration-zinc-300 underline-offset-4 transition hover:decoration-zinc-500 dark:text-zinc-200 dark:decoration-white/20 dark:hover:decoration-white/50"
-                  >
-                    Quentin Hocdé
-                  </a>
-                  ,{" "}
-                  <a
-                    href="https://www.felix-nieto.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-800 underline decoration-zinc-300 underline-offset-4 transition hover:decoration-zinc-500 dark:text-zinc-200 dark:decoration-white/20 dark:hover:decoration-white/50"
-                  >
-                    Felix Nieto
-                  </a>{" "}
-                  e{" "}
-                  <a
-                    href="https://bogdankolomiyets.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-800 underline decoration-zinc-300 underline-offset-4 transition hover:decoration-zinc-500 dark:text-zinc-200 dark:decoration-white/20 dark:hover:decoration-white/50"
-                  >
-                    Bogdan Kolomiyets
-                  </a>
-                  .
+                  Comunicação direta com quem decide, do começo ao fim.
                 </p>
               </div>
               <ol data-gsap-stagger className="space-y-6">
@@ -693,11 +668,11 @@ export function Landing() {
               data-gsap-reveal
               className="font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-tight text-zinc-900 dark:text-white"
             >
-              Vamos construir o próximo release juntos.
+              Vamos tirar seu projeto do papel?
             </h2>
             <p data-gsap-reveal className="mx-auto mt-6 max-w-xl text-zinc-600 dark:text-zinc-400">
-              Conte objetivos, prazo e stack atual. Respondemos com uma proposta
-              técnica objetiva — sem slides genéricos.
+              Conte sua ideia, objetivo e prazo. Retornamos com um plano claro,
+              simples de entender e focado no que você precisa.
             </p>
             <div
               data-gsap-reveal
