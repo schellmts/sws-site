@@ -128,10 +128,10 @@ export function InnovationDnd({ reducedMotion }: { reducedMotion: boolean }) {
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
-      activationConstraint: { distance: 6 },
+      activationConstraint: { distance: 2 },
     }),
     useSensor(TouchSensor, {
-      activationConstraint: { delay: 180, tolerance: 8 },
+      activationConstraint: { delay: 90, tolerance: 12 },
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,

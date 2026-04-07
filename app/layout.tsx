@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Syne } from "next/font/google";
 
+import { SmoothRouteScroll } from "./components/smooth-route-scroll";
 import { SmoothScroll } from "./components/smooth-scroll";
 import { ThemeProvider } from "./components/theme-provider";
 import "./globals.css";
@@ -45,6 +46,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider>
+          <SmoothRouteScroll />
           <SmoothScroll>{children}</SmoothScroll>
         </ThemeProvider>
       </body>

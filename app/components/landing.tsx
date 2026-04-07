@@ -2,15 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 
+import { useLandingGsap } from "../hooks/use-landing-gsap";
 import { InnovationDnd } from "./innovation-dnd";
+import { Magnetic } from "./magnetic";
 import { ThemeToggle } from "./theme-toggle";
 
 const nav = [
   { href: "#servicos", label: "Serviços" },
   { href: "#inovacao", label: "Inovação" },
-  { href: "/showcase", label: "Showcase" },
+  { href: "/showcase", label: "Projetos" },
   { href: "#processo", label: "Processo" },
   { href: "#stack", label: "Stack" },
   { href: "#contato", label: "Contato" },
@@ -150,6 +152,49 @@ const stack = [
   "AWS",
 ];
 
+const solutionTopics: {
+  title: string;
+  audience: string;
+  value: string;
+  deliverables: string[];
+}[] = [
+  {
+    title: "Agenda inteligente",
+    audience: "Para clínicas, consultórios e serviços por horário",
+    value:
+      "Organiza atendimentos, evita conflitos de horário e reduz faltas com confirmações automáticas.",
+    deliverables: ["Agendamento online", "Lembrete por WhatsApp", "Painel de horários"],
+  },
+  {
+    title: "Calendário operacional",
+    audience: "Para times com rotina de tarefas e prazos",
+    value:
+      "Centraliza compromissos, entregas e responsáveis em um calendário simples de acompanhar.",
+    deliverables: ["Visão semanal/mensal", "Filtros por equipe", "Alertas de prazo"],
+  },
+  {
+    title: "Controle interno",
+    audience: "Para empresas que hoje usam planilhas soltas",
+    value:
+      "Cria um sistema interno para cadastro, aprovações e acompanhamento de processos com histórico.",
+    deliverables: ["Perfis de acesso", "Fluxo de aprovação", "Relatórios básicos"],
+  },
+  {
+    title: "Catálogo de apresentação",
+    audience: "Para lojas, distribuidores e equipes comerciais",
+    value:
+      "Mostra produtos e serviços com organização visual, busca rápida e materiais para venda.",
+    deliverables: ["Categorias e filtros", "Página de produto", "Link compartilhável"],
+  },
+  {
+    title: "Integração entre sistemas",
+    audience: "Para negócios com ferramentas que não conversam",
+    value:
+      "Conecta site, CRM, ERP e outros sistemas para eliminar retrabalho e manter dados sincronizados.",
+    deliverables: ["Integração API", "Sincronização automática", "Tratamento de falhas"],
+  },
+];
+
 function BrandLogo({
   width,
   height,
@@ -185,8 +230,14 @@ function BrandLogo({
 }
 
 export function Landing() {
+  const scopeRef = useRef<HTMLDivElement>(null);
+  useLandingGsap(scopeRef);
+
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500 ease-out">
+    <div
+      ref={scopeRef}
+      className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500 ease-out"
+    >
       <div
         className="pointer-events-none fixed inset-0 -z-10 opacity-[0.5] dark:opacity-[0.45]"
         aria-hidden
@@ -203,15 +254,26 @@ export function Landing() {
             <BrandLogo width={140} height={40} className="max-h-8 w-auto opacity-95" priority />
           </Link>
           <nav className="hidden flex-1 items-center justify-center gap-8 text-sm font-medium tracking-wide text-zinc-600 md:flex dark:text-zinc-400">
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="transition-colors hover:text-zinc-900 dark:hover:text-white"
-              >
-                {item.label}
-              </a>
-            ))}
+            {nav.map((item) =>
+              item.href.startsWith("/") ? (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  scroll={false}
+                  className="transition-colors hover:text-zinc-900 dark:hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="transition-colors hover:text-zinc-900 dark:hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ),
+            )}
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
@@ -252,12 +314,14 @@ export function Landing() {
                 desempenho — do discovery ao deploy.
               </p>
               <div data-hero-cta className="flex flex-wrap gap-4">
-                <a
-                  href="#contato"
-                  className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-7 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-white dark:text-[#0a0a0a] dark:hover:bg-zinc-200"
-                >
-                  Iniciar projeto
-                </a>
+                <Magnetic>
+                  <a
+                    href="#contato"
+                    className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-7 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-white dark:text-[#0a0a0a] dark:hover:bg-zinc-200"
+                  >
+                    Iniciar projeto
+                  </a>
+                </Magnetic>
                 <a
                   href="#servicos"
                   className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-7 py-3 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 dark:border-white/15 dark:text-zinc-200 dark:hover:border-white/30"
@@ -266,9 +330,10 @@ export function Landing() {
                 </a>
                 <Link
                   href="/showcase"
+                  scroll={false}
                   className="inline-flex items-center justify-center rounded-full border border-[#4A4458]/35 bg-[#4A4458]/8 px-7 py-3 text-sm font-medium text-[#4A4458] transition hover:bg-[#4A4458]/14 dark:border-[#4A4458]/55 dark:bg-[#4A4458]/18 dark:text-[#c5bed5] dark:hover:bg-[#4A4458]/24"
                 >
-                  Ver showcase
+                  Ver projetos
                 </Link>
               </div>
             </div>
@@ -403,6 +468,56 @@ export function Landing() {
                 </article>
               ))}
             </div>
+
+            <div className="mt-8 rounded-2xl border border-zinc-200/90 bg-zinc-50/70 p-6 dark:border-white/[0.08] dark:bg-white/[0.03] sm:p-8">
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#5c5470] dark:text-[#b5aec4]">
+                    Soluções que desenvolvemos
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-semibold text-zinc-900 dark:text-white">
+                    Modelos prontos para acelerar seu projeto
+                  </h3>
+                </div>
+                <p className="max-w-md text-sm text-zinc-600 dark:text-zinc-400">
+                  Partimos de bases já testadas e adaptamos tudo para a
+                  realidade do seu negócio.
+                </p>
+              </div>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {solutionTopics.map((topic) => (
+                  <article
+                    key={topic.title}
+                    className="rounded-xl border border-zinc-200/80 bg-white p-4 dark:border-white/[0.08] dark:bg-zinc-950/70"
+                  >
+                    <p className="font-display text-lg font-semibold text-zinc-900 dark:text-white">
+                      {topic.title}
+                    </p>
+                    <p className="mt-1 text-xs text-[#5c5470] dark:text-[#b5aec4]">
+                      {topic.audience}
+                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      {topic.value}
+                    </p>
+                    <ul className="mt-4 space-y-1.5">
+                      {topic.deliverables.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400"
+                        >
+                          <span
+                            className="h-1.5 w-1.5 rounded-full bg-[#4A4458]"
+                            aria-hidden
+                          />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -445,7 +560,7 @@ export function Landing() {
                 </p>
               </div>
               <div data-no-lenis>
-                <InnovationDnd reducedMotion={true} />
+                <InnovationDnd reducedMotion={false} />
               </div>
             </div>
           </div>
@@ -588,12 +703,14 @@ export function Landing() {
               data-gsap-reveal
               className="mt-10 flex flex-wrap justify-center gap-4"
             >
-              <a
-                href="mailto:contato@schellwebservices.com"
-                className="inline-flex items-center justify-center rounded-full bg-[#4A4458] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_0_32px_-12px_rgba(74,68,88,0.55)] transition hover:bg-[#5c5469] dark:shadow-[0_0_40px_-10px_rgba(74,68,88,0.8)]"
-              >
-                contato@schellwebservices.com
-              </a>
+              <Magnetic>
+                <a
+                  href="mailto:contato@schellwebservices.com"
+                  className="inline-flex items-center justify-center rounded-full bg-[#4A4458] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_0_32px_-12px_rgba(74,68,88,0.55)] transition hover:bg-[#5c5469] dark:shadow-[0_0_40px_-10px_rgba(74,68,88,0.8)]"
+                >
+                  contato@schellwebservices.com
+                </a>
+              </Magnetic>
               <a
                 href="https://www.linkedin.com/"
                 target="_blank"
@@ -612,15 +729,26 @@ export function Landing() {
           <div className="flex flex-col items-center gap-4 sm:items-start">
             <BrandLogo width={120} height={36} className="max-h-7 w-auto opacity-90" />
             <nav className="flex flex-wrap justify-center gap-x-5 gap-y-2 md:hidden">
-              {nav.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-xs tracking-wide text-zinc-500 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {nav.map((item) =>
+                item.href.startsWith("/") ? (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    scroll={false}
+                    className="text-xs tracking-wide text-zinc-500 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="text-xs tracking-wide text-zinc-500 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                ),
+              )}
             </nav>
           </div>
           <p className="text-center sm:max-w-xs sm:text-right">

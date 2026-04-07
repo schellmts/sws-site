@@ -1,5 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+
+import { useShowcaseGsap } from "../hooks/use-showcase-gsap";
 
 const projects = [
   {
@@ -58,14 +63,23 @@ const capabilities = [
 ];
 
 export default function ShowcasePage() {
+  const scopeRef = useRef<HTMLElement>(null);
+  useShowcaseGsap(scopeRef);
+
   return (
-    <main className="min-h-screen bg-background px-5 pb-20 pt-28 text-foreground sm:px-8">
+    <main
+      ref={scopeRef}
+      className="min-h-screen bg-background px-5 pb-20 pt-28 text-foreground sm:px-8"
+    >
       <div className="mx-auto max-w-6xl">
-        <header className="rounded-2xl border border-zinc-200/90 bg-white/80 p-6 backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03] sm:p-10">
+        <header
+          data-showcase-hero
+          className="rounded-2xl border border-zinc-200/90 bg-white/80 p-6 backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03] sm:p-10"
+        >
           <div className="flex flex-wrap items-center justify-between gap-5">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.35em] text-[#5c5470] dark:text-[#9d96ab]">
-                Showcase de projetos
+                Projetos
               </p>
               <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-zinc-900 dark:text-white sm:text-5xl">
                 Projetos entregues com impacto mensurável
@@ -77,6 +91,7 @@ export default function ShowcasePage() {
             </div>
             <Link
               href="/"
+              scroll={false}
               className="inline-flex rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 dark:border-white/15 dark:text-zinc-200 dark:hover:border-white/30"
             >
               Voltar para landing
@@ -84,10 +99,14 @@ export default function ShowcasePage() {
           </div>
         </header>
 
-        <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <section
+          data-showcase-stagger
+          className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {capabilities.map((item) => (
             <div
               key={item}
+              data-showcase-stagger-item
               className="rounded-xl border border-zinc-200/90 bg-zinc-50/80 px-4 py-3 text-sm text-zinc-700 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-zinc-300"
             >
               {item}
@@ -95,14 +114,25 @@ export default function ShowcasePage() {
           ))}
         </section>
 
-        <section className="mt-10 grid gap-6 lg:grid-cols-2">
+        <section
+          data-showcase-stagger
+          className="mt-10 grid gap-6 lg:grid-cols-2"
+        >
           {projects.map((project) => (
             <article
               key={project.name}
+              data-showcase-stagger-item
               className="group overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-sm transition hover:border-[#4A4458]/45 dark:border-white/[0.1] dark:bg-zinc-950/95 dark:[background-image:linear-gradient(155deg,rgba(74,68,88,0.2)_0%,rgba(5,5,5,0.45)_50%,transparent_80%)]"
             >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <div className="absolute inset-0 h-[112%] w-full" style={{ top: "-6%" }}>
+              <div
+                data-showcase-parallax
+                className="relative aspect-[16/9] overflow-hidden"
+              >
+                <div
+                  data-showcase-parallax-inner
+                  className="absolute inset-0 h-[112%] w-full"
+                  style={{ top: "-6%" }}
+                >
                   <Image
                     src={project.image}
                     alt={`Projeto ${project.name}`}
