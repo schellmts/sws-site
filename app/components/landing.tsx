@@ -18,6 +18,11 @@ const nav = [
   { href: "#contato", label: "Contato" },
 ];
 
+const contactEmail = "matheusdsantos1309@gmail.com";
+const whatsappHref = `https://wa.me/5542988039085?text=${encodeURIComponent(
+  "Olá! Vim pelo site da Schell Web Services e gostaria de conversar sobre um projeto.",
+)}`;
+
 const services: {
   tag: string;
   title: string;
@@ -145,8 +150,8 @@ const stack = [
   "TypeScript",
   "React",
   "Next.js",
-  "Node",
-  "PostgreSQL",
+  "Laravel",
+  "MySQL",
   "Redis",
   "Docker",
   "AWS",
@@ -314,8 +319,8 @@ export function Landing() {
                 className="max-w-xl text-lg leading-relaxed text-zinc-600 sm:text-xl dark:text-zinc-400"
               >
                 Criamos sites, sistemas e automações para negócios que querem
-                crescer no digital, inclusive para quem ainda vai começar seu
-                primeiro projeto online.
+                crescer no digital, seja para quem está começando agora ou para
+                quem quer evoluir o que já tem.
               </p>
               <div data-hero-cta className="flex flex-wrap gap-4">
                 <Magnetic>
@@ -680,19 +685,19 @@ export function Landing() {
             >
               <Magnetic>
                 <a
-                  href="mailto:contato@schellwebservices.com"
+                  href={`mailto:${contactEmail}`}
                   className="inline-flex items-center justify-center rounded-full bg-[#4A4458] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_0_32px_-12px_rgba(74,68,88,0.55)] transition hover:bg-[#5c5469] dark:shadow-[0_0_40px_-10px_rgba(74,68,88,0.8)]"
                 >
-                  contato@schellwebservices.com
+                  E-mail
                 </a>
               </Magnetic>
               <a
-                href="https://www.linkedin.com/"
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-8 py-3.5 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 dark:border-white/15 dark:text-zinc-200 dark:hover:border-white/30"
               >
-                LinkedIn
+                WhatsApp
               </a>
             </div>
           </div>
